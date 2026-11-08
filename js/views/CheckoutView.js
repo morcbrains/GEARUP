@@ -1,3 +1,4 @@
+// kang tsan ni tanan e paste then git push
 class CheckoutView extends View {
   _parentElement = document.querySelector('#checkout-view');
 
@@ -8,7 +9,7 @@ class CheckoutView extends View {
         <div class="history-top"><strong>${this._escape(reservation.id)}</strong>
           <span class="reservation-status ${reservation.status === 'Reserved' ? 'active' : 'cancelled'}">${this._escape(reservation.status)}</span></div>
         <small>${this._escape(reservation.customerName)} · Pickup: ${this._escape(reservation.pickupDate)}</small>
-        <p class="history-items">${reservation.items.map(item => ${item.quantity}× ${this._escape(item.name)}).join(' · ')}</p>
+        <p class="history-items">${reservation.items.map(item => `${item.quantity}× ${this._escape(item.name)}`).join(' · ')}</p>
         <div class="history-bottom"><span>Cash on pickup · ${new Date(reservation.createdAt).toLocaleDateString('en-PH')}</span>
           <strong>${this._money(reservation.total)}</strong></div>
         ${reservation.status === 'Reserved' ? <button type="button" class="cancel-reservation" data-reservation-id="${this._escape(reservation.id)}">Cancel demo reservation</button> : ''}
