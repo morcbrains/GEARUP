@@ -7,7 +7,7 @@ class CartView extends View {
     const cart = this._data;
     return `<div class="section-heading compact">
         <div><span class="eyebrow">02 / PLAN</span><h2>My Visit <span class="highlight">List</span></h2>
-          <p>Choose gear and see the estimated amount to pay at the store.</p></div>
+          <p>Choose Gear and See The Estimated Amount to Pay at the Store.</p></div>
         <span class="count-badge">${cart.count} item${cart.count === 1 ? '' : 's'}</span>
       </div>
       <div class="cart-panel">
@@ -25,10 +25,10 @@ class CartView extends View {
         <div class="cart-totals">
           <div><span>Subtotal</span><strong data-test="subtotal">${this._money(cart.subtotal)}</strong></div>
           <div><span>Planning / shipping fees</span><strong>FREE</strong></div>
-          <div class="grand-total"><span>Grand Total <small>(estimated in-store payment)</small></span><strong data-test="grand-total">${this._money(cart.grandTotal)}</strong></div>
+          <div class="grand-total"><span>Grand Total <small>(Estimated In-Store Payment)</small></span><strong data-test="grand-total">${this._money(cart.grandTotal)}</strong></div>
         </div>
         <a class="button primary full-button" href="#checkout">Continue to Reservation →</a>
-        <p class="muted center">Prices and stock are illustrative until confirmed by a store.</p>
+        <p class="muted center">Prices and  Stock are Illustrative Until Confirmed by a Store.</p>
         <p class="feedback" id="cart-feedback" role="status" aria-live="polite"></p>
       </div>`;
   }

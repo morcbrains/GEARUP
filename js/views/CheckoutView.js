@@ -31,7 +31,7 @@ class CheckoutView extends View {
 
         <div class="history-bottom">
           <span>
-            Cash on pickup ·
+            Cash on Pickup·
             ${new Date(reservation.createdAt).toLocaleDateString('en-PH')}
           </span>
           <strong>${this._money(reservation.total)}</strong>
@@ -56,7 +56,7 @@ class CheckoutView extends View {
         <div>
           <span class="eyebrow">03 / RESERVE</span>
           <h2>Product <span class="highlight">Reservation</span></h2>
-          <p>Enter your details for a pickup reservation.</p>
+          <p>Enter Your Details For a Pickup Reservation.</p>
         </div>
       </div>
 
@@ -77,14 +77,14 @@ class CheckoutView extends View {
         <form id="reservation-form" class="checkout-form" novalidate>
 
           <label>
-            Customer full name
+            Customer Full Name
             <input name="name" autocomplete="name"
               maxlength="80" placeholder="Enter Here"
               value="${this._escape(customer.name)}">
           </label>
 
           <label>
-            Mobile number
+            Mobile Number
             <input name="phone" type="tel" inputmode="numeric"
               autocomplete="tel" maxlength="11"
               placeholder="Enter Here"
@@ -92,20 +92,20 @@ class CheckoutView extends View {
           </label>
 
           <label>
-            Preferred pickup date
+            Preferred Pickup Date
             <input name="pickupDate" type="date"
               min="${this._escape(data.today)}"
               value="${this._escape(customer.pickupDate)}">
           </label>
 
           <label>
-            Payment arrangement
+            Payment Arrangement
             <input type="text"
               value="Cash on pickup at the physical store" disabled>
           </label>
 
           <div class="checkout-estimate">
-            <span>Estimated amount</span>
+            <span>Estimated Amount</span>
             <strong>${this._money(data.total)}</strong>
           </div>
 
