@@ -40,7 +40,7 @@ class CheckoutView extends View {
         ${reservation.status === 'Reserved'
           ? `<button type="button" class="cancel-reservation"
               data-reservation-id="${this._escape(reservation.id)}">
-              Cancel demo reservation
+              Cancel Reservation
             </button>`
           : ''}
       </article>
@@ -56,7 +56,7 @@ class CheckoutView extends View {
         <div>
           <span class="eyebrow">03 / RESERVE</span>
           <h2>Product <span class="highlight">Reservation</span></h2>
-          <p>Enter your details for a demo pickup reservation.</p>
+          <p>Enter your details for a pickup reservation.</p>
         </div>
       </div>
 
@@ -79,7 +79,7 @@ class CheckoutView extends View {
           <label>
             Customer full name
             <input name="name" autocomplete="name"
-              maxlength="80" placeholder="Juan Dela Cruz"
+              maxlength="80" placeholder="Enter Here"
               value="${this._escape(customer.name)}">
           </label>
 
@@ -87,7 +87,7 @@ class CheckoutView extends View {
             Mobile number
             <input name="phone" type="tel" inputmode="numeric"
               autocomplete="tel" maxlength="11"
-              placeholder="09XXXXXXXXX"
+              placeholder="Enter Here"
               value="${this._escape(customer.phone)}">
           </label>
 
@@ -112,15 +112,6 @@ class CheckoutView extends View {
           <button class="button primary full-button" type="submit">
             Reserve Selected Products
           </button>
-
-          <p class="muted">
-            Demo only: this action updates local sample stock and saves
-            the reservation history in THIS browser. It does not notify
-            the store, share stock between devices, charge money, or
-            guarantee pickup. Contact the store to confirm. Customer
-            information remains in this browser's storage.
-          </p>
-
         </form>
 
         <div class="history-section">

@@ -46,13 +46,13 @@ class ProductCatalogView extends View {
       </div>
       ${error ? `<div class="form-error" role="alert">${this._escape(error)}</div>` : ''}
       <form id="product-form" class="product-form" novalidate>
-        <label>Product name<input name="name" maxlength="80" placeholder="e.g. Gaming Mouse" value="${this._escape(product.name)}"></label>
+        <label>Product name<input name="name" maxlength="80" placeholder="Enter Here" value="${this._escape(product.name)}"></label>
         <label>Category<select name="category">
           <option value="">Choose category</option>
           ${categories.map(category => `<option value="${this._escape(category)}" ${product.category === category ? 'selected' : ''}>${this._escape(category)}</option>`).join('')}
         </select></label>
-        <label>Price (₱)<input type="number" name="price" min="0" max="1000000" step="0.01" placeholder="1299" value="${this._escape(product.price)}"></label>
-        <label>Stock quantity<input type="number" name="stock" min="0" max="100000" step="1" placeholder="5" value="${this._escape(product.stock)}"></label>
+        <label>Price (₱)<input type="number" name="price" min="0" max="1000000" step="0.01" placeholder="Enter Here" value="${this._escape(product.price)}"></label>
+        <label>Stock quantity<input type="number" name="stock" min="0" max="100000" step="1" placeholder="Enter Here" value="${this._escape(product.stock)}"></label>
         <label class="wide">Description<input name="description" maxlength="160" placeholder="Short product details" value="${this._escape(product.description)}"></label>
         <button type="submit" class="button primary form-submit">${editingProduct ? 'Save changes' : '+ Add product'}</button>
       </form>`;
