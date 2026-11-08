@@ -105,3 +105,27 @@ function controlCartAction(action, id) {
     cartView.showFeedback(error.message);
   }
 }
+
+function controlReserve(customer) {
+  try {
+    const reservation = model.createReservation(customer);
+    renderAll();
+    checkoutView.render({
+      reservations: model.state.reservations,
+      total: model.getCartDetails().grandTotal,
+      today: getTodayString(),
+      success: `${reservation.id} saved locally. Please contact the store to confirm pickup.`
+    });
+  } catch (error) {
+    renderCheckout({ error: error.message, customer });
+  }
+}
+function controlCancelReservation(id) {
+  try {
+    model.cancelReservation(id);
+    renderAll();
+    renderCheckout({ success: `${id} cancelled in this browser. Sample stock was restored.` });
+  } catch (error) {
+    renderCheckout({ error: error.message });
+  }
+}
