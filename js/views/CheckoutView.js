@@ -1,4 +1,3 @@
-// kang tsan ni tanan e paste then git push
 class CheckoutView extends View {
   _parentElement = document.querySelector('#checkout-view');
 
