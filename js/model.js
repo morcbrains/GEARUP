@@ -134,3 +134,46 @@ export function deleteProduct(id) {
   state.cart = state.cart.filter(item => item.id !== id);
   saveState();
 } 
+
+export function addToCart(id) {
+  const product = state.products.find(item => item.id === id);
+  if (!product || product.stock === 0) throw new Error('This product is out of stock.');
+  const line = state.cart.find(item => item.id === id);
+  if (line) {
+    if (line.quantity >= product.stock) throw new Error('Cannot add more than the available stock.');
+    line.quantity += 1;
+  } else {
+    state.cart.push({ id, quantity: 1 });
+  }
+  saveState();
+}
+
+export function changeCartQuantity(id, amount) {
+  const product = state.products.find(p => p.id === id);
+  const line = state.cart.find(item => item.id === id);
+  if (!product || !line) return;
+  const next = line.quantity + amount;
+  if (next > product.stock) throw new Error('Cannot add more than the available stock.');
+  if (next < 1) state.cart = state.cart.filter(item => item.id !== id);
+  else line.quantity = next;
+  saveState();
+}
+
+export function removeCartItem(id) {
+  state.cart = state.cart.filter(item => item.id !== id);
+  saveState();
+}
+
+export function getCartDetails() {
+  const items = state.cart.map(line => {
+    const product = state.products.find(p => p.id === line.id);
+    return product ? { ...product, quantity: line.quantity, lineTotal: product.price * line.quantity } : null;
+  }).filter(Boolean);
+  const subtotal = items.reduce((sum, item) => sum + item.lineTotal, 0);
+  return {
+    items,
+    count: items.reduce((sum, item) => sum + item.quantity, 0),
+    subtotal,
+    grandTotal: subtotal 
+  };
+}
