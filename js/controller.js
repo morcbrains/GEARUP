@@ -129,3 +129,16 @@ function controlCancelReservation(id) {
     renderCheckout({ error: error.message });
   }
 }
+
+function init() {
+  model.loadState();
+  productCatalogView.addHandlerSearch(controlSearch);
+  productCatalogView.addHandlerCategory(controlFilter);
+  productCatalogView.addHandlerSubmit(controlSaveProduct);
+  productCatalogView.addHandlerAction(controlCatalogAction);
+  cartView.addHandlerAction(controlCartAction);
+  checkoutView.addHandlerSubmit(controlReserve);
+  checkoutView.addHandlerCancel(controlCancelReservation);
+  renderAll();
+}
+init();
