@@ -94,3 +94,14 @@ function controlCatalogAction(action, id) {
   }
 }
 
+function controlCartAction(action, id) {
+  try {
+    if (action === 'increase') model.changeCartQuantity(id, 1);
+    if (action === 'decrease') model.changeCartQuantity(id, -1);
+    if (action === 'remove') model.removeCartItem(id);
+    renderCart();
+    renderCheckout();
+  } catch (error) {
+    cartView.showFeedback(error.message);
+  }
+}
