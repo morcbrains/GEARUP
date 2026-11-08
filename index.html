@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090c16">
+  <meta name="description" content="GEAR UP: browse sample gaming and computer accessories and plan a store pickup visit.">
+  <title>GEAR UP | Check Before You Visit</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script type="module" src="./js/controller.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="GEAR UP homepage">
+      <span class="brand-icon">G<span class="brand-spark">+</span></span>
+      <span>GEAR <strong>UP</strong><small>GAMING & PC ACCESSORIES</small></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#catalog">Catalog</a>
+      <a href="#cart">Visit List</a>
+      <a href="#checkout" class="nav-pill">Reservations</a>
+    </nav>
+  </header>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow"><span class="signal"></span> GAMING GEAR AVAILABILITY PREVIEW</span>
+        <h1>Find your gear.<br><em>Skip the wasted trip.</em></h1>
+        <p>Know what's listed as available before you travel. Search computer accessories, prepare your visit list and create a demo pickup reservation.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#catalog">Explore Available Gear ↗</a>
+          <a class="button secondary" href="#how-it-works">How it works</a>
+        </div>
+      </div>
+      <div class="hero-illustration" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="hero-gear">⌨️</div><div class="hero-floating float-one">🎧</div>
+        <div class="hero-floating float-two">🖱️</div>
+        <span class="hero-badge">CHECK STOCK<br><strong>BEFORE YOU GO</strong></span>
+      </div>
+    </section>
+    <aside id="how-it-works" class="notice" role="note">
+      <span class="notice-icon">ℹ️</span>
+      <div><strong>School prototype — not an online shop or live inventory service.</strong>
+        This application demonstrates a physical-store visit planner. Its products, stock counts and reservations are local to your browser only. No real store receives a reservation, and payment is made at the physical store. Call the store before travelling.</div>
+    </aside>
+    <section id="catalog" class="content-section" aria-label="Product catalog"><div id="catalog-view"></div></section>
+    <div class="lower-layout">
+      <section id="cart" class="content-section" aria-label="Visit list"><div id="cart-view"></div></section>
+      <section id="checkout" class="content-section" aria-label="Reservation form and history"><div id="checkout-view"></div></section>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <span>GEAR <strong>UP</strong> · ITPFE 1 · MVC Prelim Project</span>
+    <span>Built with plain JavaScript · Saved to this browser only</span>
+  </footer>
+</body>
+</html>
