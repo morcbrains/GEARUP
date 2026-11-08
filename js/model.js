@@ -113,3 +113,24 @@ export function addProduct(data) {
   state.products.push({ id: state.nextProductId++, ...product });
   saveState();
 }
+
+export function editProduct(id, data) {
+  const product = state.products.find(p => p.id === id);
+  if (!product) throw new Error('Product not found.');
+  const valid = validateProduct(data);
+  Object.assign(product, valid);
+  state.cart = state.cart.filter(item => item.id !== id || product.stock > 0)
+    .map(item => item.id === id ? { ...item, quantity: Math.min(item.quantity, product.stock) } : item);
+  saveState();
+}
+
+export function deleteProduct(id) {
+  if (state.reservations.some(r => r.status === 'Reserved' && r.items.some(item => item.id === id))) {
+    throw new Error('Cancel active reservations for this product before deleting it.');
+  }
+  const before = state.products.length;
+  state.products = state.products.filter(product => product.id !== id);
+  if (state.products.length === before) throw new Error('Product not found.');
+  state.cart = state.cart.filter(item => item.id !== id);
+  saveState();
+} 
