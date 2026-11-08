@@ -177,3 +177,58 @@ export function getCartDetails() {
     grandTotal: subtotal 
   };
 }
+
+function validateReservation(customer) {
+  const name = String(customer.name ?? '').trim();
+  const phone = String(customer.phone ?? '').trim();
+  const pickupDate = String(customer.pickupDate ?? '').trim();
+  if (name.length < 2 || name.length > 80) throw new Error('Enter your full name (2–80 characters).');
+  if (!/^09\d{9}$/.test(phone)) throw new Error('Enter a valid Philippine number: 09XXXXXXXXX (11 digits).');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(pickupDate)) throw new Error('Select a pickup date.');
+  const parsed = new Date(`${pickupDate}T12:00:00`);
+  const validCalendarDate = !Number.isNaN(parsed.getTime()) && parsed.getFullYear() === Number(pickupDate.slice(0, 4)) &&
+    parsed.getMonth() + 1 === Number(pickupDate.slice(5, 7)) && parsed.getDate() === Number(pickupDate.slice(8, 10));
+  const now = new Date();
+  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+  if (!validCalendarDate || pickupDate < today) throw new Error('Pickup date must be today or a future date.');
+  return { name, phone, pickupDate };
+}
+
+export function createReservation(customer) {
+  const details = validateReservation(customer);
+  const cart = getCartDetails();
+  if (cart.items.length === 0) throw new Error('Your visit list is empty. Add products first.');
+  for (const item of cart.items) {
+    const product = state.products.find(p => p.id === item.id);
+    if (!product || item.quantity > product.stock) throw new Error(`Not enough stock for ${item.name}.`);
+  }
+  const reservation = {
+    id: `GU-${String(state.nextReservationId++).padStart(4, '0')}`,
+    createdAt: new Date().toISOString(),
+    customerName: details.name,
+    phone: details.phone,
+    pickupDate: details.pickupDate,
+    items: cart.items.map(({ id, name, price, quantity }) => ({ id, name, price, quantity })),
+    total: cart.grandTotal,
+    payment: 'Cash on pickup at the store',
+    status: 'Reserved'
+  };
+  cart.items.forEach(item => { state.products.find(p => p.id === item.id).stock -= item.quantity; });
+  state.reservations.unshift(reservation);
+  state.cart = [];
+  saveState();
+  return reservation;
+}
+
+export function cancelReservation(id) {
+  const reservation = state.reservations.find(item => item.id === id);
+  if (!reservation) throw new Error('Reservation not found.');
+  if (reservation.status !== 'Reserved') throw new Error('This reservation is already cancelled.');
+  for (const item of reservation.items) {
+    const product = state.products.find(p => p.id === item.id);
+    if (product) product.stock += item.quantity;
+  }
+  reservation.status = 'Cancelled';
+  saveState();
+  return reservation;
+}
